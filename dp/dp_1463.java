@@ -8,24 +8,23 @@ public class dp_1463 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        int dp[] = new int[n];
-        int cnt = 0;
-        dp[0] = n;
-        for (int i = 1; i < n; i++) {
-            if (dp[i] == 1) {
-                System.out.println(cnt);
-                break;
+        int dp[] = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 0;
+        for (int i = 2; i < n + 1; i++) {
+            dp[i] = dp[i - 1] + 1;
+            if (i % 2 == 0) {
+                if (dp[i / 2] + 1 < dp[i]) {
+                    dp[i] = dp[i / 2] + 1;
+                }
             }
-            if (n % 3 == 0) {
-                cnt++;
-                dp[i] = n / 3;
+            if (i % 3 == 0) {
+                if (dp[i / 3] + 1 < dp[i]) {
+                    dp[i] = dp[i / 3] + 1;
+                }
             }
-            if (n % 2 == 0) {
-                cnt++;
-                dp[i] = n / 2;
-            }
-            cnt++;
-            dp[i] = n - 1;
+
         }
+        System.out.println(dp[n]);
     }
 }
