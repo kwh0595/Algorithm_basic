@@ -18,21 +18,18 @@ public class dp_11055 {
         }
         int dp[] = new int[n];
         dp[0] = array[0];
-        int max = dp[0];
         for (int i = 1; i < dp.length; i++) {
-            dp[i] = 1;
+            dp[i] = array[i];
             for (int j = 0; j < i; j++) {
-                if (array[i] > array[j]) {
-                    max = Math.max(max, array[j]);
+                if (array[j] < array[i]) {
+                    dp[i] = Math.max(dp[j] + array[i], array[i]);
                 }
             }
-            dp[i] = dp[max] + array[i];
         }
-
-        int max2 = dp[0];
+        int max = dp[0];
         for (int i : dp) {
-            max2 = Math.max(max, i);
+            max = Math.max(max, i);
         }
-        System.out.println(max2);
+        System.out.println(max);
     }
 }
